@@ -20,7 +20,7 @@ const makeStatisticCloud = (ctx) => {
   makeCloud(ctx, CLOUD_X, CLOUD_Y, `#fff`);
 };
 const getMaxElement = (arr) => {
-  let sortArr = arr.slice();
+  const sortArr = arr.slice();
   sortArr.sort();
   return sortArr[sortArr.length - 1];
 };
