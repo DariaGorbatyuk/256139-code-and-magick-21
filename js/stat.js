@@ -17,7 +17,7 @@ const makeCloud = (ctx, x, y, color) => {
 };
 const makeStatisticCloud = (ctx) => {
   makeCloud(ctx, CLOUD_X + GAP, CLOUD_Y + GAP, `rgba(0, 0, 0, 0.7)`);
-  makeCloud(ctx, CLOUD_X, CLOUD_Y, `white`);
+  makeCloud(ctx, CLOUD_X, CLOUD_Y, `#fff`);
 };
 const getMaxElement = (arr) => {
   let sortArr = arr.slice();
@@ -25,9 +25,13 @@ const getMaxElement = (arr) => {
   return sortArr[sortArr.length - 1];
 };
 
+
 window.renderStatistics = (ctx, names, times) => {
   makeStatisticCloud(ctx);
   const maxElement = getMaxElement(times);
+  const getBarHeight = (item) => {
+    return (item * BAR_HEIGHT) / maxElement;
+  };
   ctx.fillStyle = `#000`;
   ctx.textBaseline = `hanging`;
   ctx.font = `16px PT Mono`;
@@ -36,12 +40,12 @@ window.renderStatistics = (ctx, names, times) => {
   ctx.translate(CLOUD_X + 4 * GAP, CLOUD_Y + CLOUD_HEIGHT - FONT_GAP);// переносим систему координат вниз
   for (let i = 0; i < names.length; i++) {
     ctx.fillText(names[i], COLUMN_WIDTH * i + SPACE_BETWEEN_COLUMN * i, 0);
-    ctx.transform(1, 0, 0, -1, 0, 0);
+    ctx.transform(1, 0, 0, -1, 0, 0); // переворачиваем y
     ctx.fillStyle = `hsl(240, ${Math.round(Math.random() * 100)}%, 50%)`;
     if (names[i] === `Вы`) {
       ctx.fillStyle = MY_COLOR;
     }
-    ctx.fillRect(COLUMN_WIDTH * i + SPACE_BETWEEN_COLUMN * i, GAP, COLUMN_WIDTH, (times[i] * BAR_HEIGHT) / maxElement);
+    ctx.fillRect(COLUMN_WIDTH * i + SPACE_BETWEEN_COLUMN * i, GAP, COLUMN_WIDTH, getBarHeight(times[i]));
     ctx.transform(1, 0, 0, -1, 0, 0);
     ctx.fillStyle = `#000`;
     ctx.fillText(String(Math.round(times[i])), COLUMN_WIDTH * i + SPACE_BETWEEN_COLUMN * i, -BAR_HEIGHT - FONT_GAP - GAP);
