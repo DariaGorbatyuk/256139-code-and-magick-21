@@ -24,14 +24,14 @@ const getMaxElement = (arr) => {
   sortArr.sort();
   return sortArr[sortArr.length - 1];
 };
+const getBarHeight = (item, maxElement) => {
+  return (item * BAR_HEIGHT) / maxElement;
+};
 
 
 window.renderStatistics = (ctx, names, times) => {
   makeStatisticCloud(ctx);
   const maxElement = getMaxElement(times);
-  const getBarHeight = (item) => {
-    return (item * BAR_HEIGHT) / maxElement;
-  };
   ctx.fillStyle = `#000`;
   ctx.textBaseline = `hanging`;
   ctx.font = `16px PT Mono`;
@@ -45,7 +45,7 @@ window.renderStatistics = (ctx, names, times) => {
     if (names[i] === `Вы`) {
       ctx.fillStyle = MY_COLOR;
     }
-    ctx.fillRect(COLUMN_WIDTH * i + SPACE_BETWEEN_COLUMN * i, GAP, COLUMN_WIDTH, getBarHeight(times[i]));
+    ctx.fillRect(COLUMN_WIDTH * i + SPACE_BETWEEN_COLUMN * i, GAP, COLUMN_WIDTH, getBarHeight(times[i], maxElement));
     ctx.transform(1, 0, 0, -1, 0, 0);
     ctx.fillStyle = `#000`;
     ctx.fillText(String(Math.round(times[i])), COLUMN_WIDTH * i + SPACE_BETWEEN_COLUMN * i, -BAR_HEIGHT - FONT_GAP - GAP);
