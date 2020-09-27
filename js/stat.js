@@ -38,16 +38,17 @@ window.renderStatistics = (ctx, names, times) => {
   ctx.fillText(`Ура вы победили!`, 110, 30);
   ctx.fillText(`Список результатов: `, 110, 50);
   ctx.translate(CLOUD_X + 4 * GAP, CLOUD_Y + CLOUD_HEIGHT - FONT_GAP);// переносим систему координат вниз
-  for (let i = 0; i < names.length; i++) {
-    ctx.fillText(names[i], COLUMN_WIDTH * i + SPACE_BETWEEN_COLUMN * i, 0);
+  names.forEach((name, index) => {
+    ctx.fillText(name, COLUMN_WIDTH * index + SPACE_BETWEEN_COLUMN * index, 0);
     ctx.transform(1, 0, 0, -1, 0, 0); // переворачиваем y
     ctx.fillStyle = `hsl(240, ${Math.round(Math.random() * 100)}%, 50%)`;
-    if (names[i] === `Вы`) {
+    if (name === `Вы`) {
       ctx.fillStyle = MY_COLOR;
     }
-    ctx.fillRect(COLUMN_WIDTH * i + SPACE_BETWEEN_COLUMN * i, GAP, COLUMN_WIDTH, getBarHeight(times[i], maxElement));
+    ctx.fillRect(COLUMN_WIDTH * index + SPACE_BETWEEN_COLUMN * index, GAP, COLUMN_WIDTH, getBarHeight(times[index], maxElement));
     ctx.transform(1, 0, 0, -1, 0, 0);// переворачиваем y
     ctx.fillStyle = `#000`;
-    ctx.fillText(String(Math.round(times[i])), COLUMN_WIDTH * i + SPACE_BETWEEN_COLUMN * i, -getBarHeight(times[i], maxElement) - FONT_GAP - GAP);
-  }
+    ctx.fillText(String(Math.round(times[index])), COLUMN_WIDTH * index + SPACE_BETWEEN_COLUMN * index, -getBarHeight(times[index], maxElement) - FONT_GAP - GAP);
+  });
 };
+
