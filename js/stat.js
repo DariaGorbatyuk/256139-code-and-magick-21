@@ -46,8 +46,8 @@ window.renderStatistics = (ctx, names, times) => {
       ctx.fillStyle = MY_COLOR;
     }
     ctx.fillRect(COLUMN_WIDTH * i + SPACE_BETWEEN_COLUMN * i, GAP, COLUMN_WIDTH, getBarHeight(times[i], maxElement));
-    ctx.transform(1, 0, 0, -1, 0, 0);
+    ctx.transform(1, 0, 0, -1, 0, 0);// переворачиваем y
     ctx.fillStyle = `#000`;
-    ctx.fillText(String(Math.round(times[i])), COLUMN_WIDTH * i + SPACE_BETWEEN_COLUMN * i, -BAR_HEIGHT - FONT_GAP - GAP);
+    ctx.fillText(String(Math.round(times[i])), COLUMN_WIDTH * i + SPACE_BETWEEN_COLUMN * i, -getBarHeight(times[i], maxElement) - FONT_GAP - GAP);
   }
 };
