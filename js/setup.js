@@ -6,6 +6,7 @@ const EYES = [`black`, `red`, `blue`, `yellow`, `green`];
 const WIZARDS_AMOUNT = 4;
 
 const setup = document.querySelector(`.setup`);
+const setupSimilar = document.querySelector(`.setup-similar`);
 setup.classList.remove(`hidden`);
 const wizardTemplate = document.querySelector(`#similar-wizard-template`).content.querySelector(`.setup-similar-item`);
 
@@ -14,12 +15,6 @@ const getRandomInt = (min, max) => {
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min)) + min; // Максимум не включается, минимум включается
 };
-
-// Стоит отдельно объявить
-// 1)функцию генерации случайных данных,
-// 2)функцию создания DOM-элемента на основе JS-объекта,
-// 3)функцию заполнения блока DOM-элементами на основе массива JS-объектов.
-
 
 const createWizardsArray = () => {
   const wizardsData = [];
@@ -34,7 +29,7 @@ const createWizardsArray = () => {
 };
 const wizardsData = createWizardsArray();
 
-const createWizard = (wizard) => {
+const renderWizard = (wizard) => {
   const wizardElement = wizardTemplate.cloneNode(true);
   wizardElement.querySelector(`.setup-similar-label`).textContent = wizard.name;
   wizardElement.querySelector(`.wizard-coat`).style.fill = wizard.coatColor;
@@ -42,3 +37,13 @@ const createWizard = (wizard) => {
   return wizardElement;
 };
 
+const createWizardList = () => {
+  const fragment = document.createDocumentFragment();
+  for (let i = 0; i < wizardsData.length; i++) {
+    let wizard = renderWizard(wizardsData[i]);
+    fragment.appendChild(wizard);
+  }
+  setupSimilar.querySelector(`.setup-similar-list`).appendChild(fragment);
+  setupSimilar.classList.remove(`hidden`);
+};
+createWizardList();
