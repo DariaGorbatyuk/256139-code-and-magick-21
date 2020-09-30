@@ -17,17 +17,17 @@ const getRandomInt = (min, max) => {
 };
 
 const createWizardsArray = () => {
-  const wizardsData = [];
+  const wizards = [];
   for (let i = 0; i <= WIZARDS_AMOUNT; i++) {
-    wizardsData[i] = {
+    wizards[i] = {
       name: `${NAMES[getRandomInt(0, NAMES.length)]} ${SURNAMES[getRandomInt(0, SURNAMES.length)]}`,
       coatColor: COATS[getRandomInt(0, COATS.length)],
       eyesColor: EYES[getRandomInt(0, EYES.length)]
     };
   }
-  return wizardsData;
+  return wizards;
 };
-const wizardsData = createWizardsArray();
+const wizards = createWizardsArray();
 
 const renderWizard = (wizard) => {
   const wizardElement = wizardTemplate.cloneNode(true);
@@ -39,8 +39,8 @@ const renderWizard = (wizard) => {
 
 const createWizardList = () => {
   const fragment = document.createDocumentFragment();
-  for (let i = 0; i < wizardsData.length; i++) {
-    let wizard = renderWizard(wizardsData[i]);
+  for (let i = 0; i < wizards.length; i++) {
+    let wizard = renderWizard(wizards[i]);
     fragment.appendChild(wizard);
   }
   setupSimilar.querySelector(`.setup-similar-list`).appendChild(fragment);
