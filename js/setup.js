@@ -37,7 +37,7 @@ const renderWizard = (wizard) => {
   return wizardElement;
 };
 
-const createWizardList = () => {
+const renderWizardList = () => {
   const fragment = document.createDocumentFragment();
   for (let i = 0; i < wizards.length; i++) {
     let wizard = renderWizard(wizards[i]);
@@ -46,4 +46,4 @@ const createWizardList = () => {
   setupSimilar.querySelector(`.setup-similar-list`).appendChild(fragment);
   setupSimilar.classList.remove(`hidden`);
 };
-createWizardList();
+renderWizardList();
