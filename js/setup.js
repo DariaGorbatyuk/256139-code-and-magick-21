@@ -4,10 +4,8 @@ const SURNAMES = [`да Марья`, `Верон`, `Мирабелла`, `Вал
 const COATS = [`rgb(101, 137, 164)`, `rgb(241, 43, 107)`, `rgb(146, 100, 161)`, `rgb(56, 159, 117)`, `rgb(215, 210, 55)`, `rgb(0, 0, 0)`];
 const EYES = [`black`, `red`, `blue`, `yellow`, `green`];
 const WIZARDS_AMOUNT = 4;
-
 const setup = document.querySelector(`.setup`);
 const setupSimilar = document.querySelector(`.setup-similar`);
-setup.classList.remove(`hidden`);
 const wizardTemplate = document.querySelector(`#similar-wizard-template`).content.querySelector(`.setup-similar-item`);
 
 const getRandomInt = (min, max) => {
@@ -27,7 +25,6 @@ const createWizardsArray = () => {
   }
   return wizards;
 };
-const wizards = createWizardsArray();
 
 const renderWizard = (wizard) => {
   const wizardElement = wizardTemplate.cloneNode(true);
@@ -46,4 +43,7 @@ const renderWizardList = () => {
   setupSimilar.querySelector(`.setup-similar-list`).appendChild(fragment);
   setupSimilar.classList.remove(`hidden`);
 };
+
+setup.classList.remove(`hidden`);
+const wizards = createWizardsArray();
 renderWizardList();
